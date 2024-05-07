@@ -30,6 +30,37 @@
 
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+    <style>
+        .notification-container {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            display: none;
+            z-index: 563;
+        }
+        
+        .notification-container.show {
+            display: block;
+        }
+        
+        .notification-content {
+            display: flex;
+            align-items: center;
+        }
+        
+        .notification-message {
+            flex-grow: 1;
+        }
+        
+        .notification-cancel {
+            cursor: pointer;
+        }
+        </style>
 </head>
 
 <body>
@@ -223,17 +254,40 @@
                 <div class="col-md-6 text-center text-md-start">
                     <p class="mb-md-0">&copy; <a class="text-white border-bottom" href="#"></a></p>
                 </div>
-                <div class="col-md-6 text-center text-md-end">
-                    <p class="mb-0">Designed by <a class="text-white border-bottom" href="https://htmlcodex.com"></a></p>
-                </div>
+               
             </div>
         </div>
     </div>
     <!-- Footer End -->
 
 
+
     <!-- Back to Top -->
     <a href="#" class="btn btn-lg btn-secondary btn-lg-square rounded back-to-top"><i class="bi bi-arrow-up"></i></a>
+</div>
+
+<script>
+let notifications = document.getElementById('notification');
+let ads = ['https://hotelbvs.netlify.app',  'https://addtheadd.com','https://bvsadd.netlify.app','https://biriyanibvs.netlify.app']; // Deep link URLs of ads
+let currentIndex = 0;
+
+function displayAd() {
+    notifications.classList.add('show');
+    setTimeout(hideAd, 10000); // Hide ad after 10 seconds
+}
+
+function hideAd() {
+    notifications.classList.remove('show');
+    currentIndex = (currentIndex + 1) % ads.length;
+    setTimeout(displayAd, 10000); // Display next ad after 10 second
+}
+
+function cancelAd() {
+    window.location.href = ads[currentIndex];
+}
+
+displayAd(); // Start displaying ads
+</script>
 
 
     <!-- JavaScript Libraries -->
